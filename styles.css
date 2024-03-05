@@ -21,7 +21,7 @@ main {
 div {
     margin-bottom: 10px;
 }
-
+/*
 button {
     padding: 10px 20px;
     border: none;
@@ -31,4 +31,50 @@ button {
         text-decoration: none;
         color: black;
     }
+}*/
+
+.mainF {
+    display: flex;
+}
+
+.left {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.right {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.team {
+    margin-bottom: 20px;
+}
+
+.team h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #0056b3;
 }
