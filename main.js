@@ -28,6 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Agregar un listener al botón "Confirmar"
-    const botonConfirmar = document.querySelector(".btnConfirmar");
+    const botonConfirmar = document.querySelector(".btnMezclar");
     botonConfirmar.addEventListener("click", asignarNombresAleatorios);
 });

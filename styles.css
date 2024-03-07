@@ -35,17 +35,20 @@ button {
 
 .mainF {
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 .left {
     width: 50%;
+    margin: 0;
     padding: 20px;
     box-sizing: border-box;
 }
 
 .right {
     width: 50%;
-    height: 80vh;
+    margin: 0;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -94,8 +97,20 @@ input {
     border: 1px solid #ccc;
 }
 
-.btnConfirmar {
+.btnMezclar {
     display: block;
-    margin: 0 auto; /* Esto centra el botón horizontalmente */
-    text-align: center; /* Esto centra el texto dentro del botón */
+    margin: 0 auto;
+    text-align: center;
+
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btnMezclar:hover {
+    background-color: #0056b3;
 }
