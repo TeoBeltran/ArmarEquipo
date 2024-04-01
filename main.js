@@ -47,5 +47,48 @@ document.addEventListener("DOMContentLoaded", function() {
     // Agregar un listener al botón "Borrar"
     const botonBorrar = document.querySelector(".btnBorrar");
     botonBorrar.addEventListener("click", borrarJugadores);
-});
 
+    // Agregar eventos de cambio a los botones de radio
+    const futbol5Radio = document.getElementById('futbol5');
+    const futbol8Radio = document.getElementById('futbol8');
+
+    futbol5Radio.addEventListener('change', function() {
+        actualizarJugadores(10, 5);
+    });
+
+    futbol8Radio.addEventListener('change', function() {
+        actualizarJugadores(16, 8);
+    });
+
+    function actualizarJugadores(totalJugadores, jugadoresPorEquipo) {
+        var inputs = document.querySelectorAll('.left input');
+        var diferencia = totalJugadores - inputs.length;
+
+        if (diferencia > 0) {
+            // Agregar jugadores adicionales
+            for (var i = 0; i < diferencia; i++) {
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Jugador ' + (inputs.length + i + 1);
+                document.querySelector('.left').appendChild(input);
+            }
+        } else if (diferencia < 0) {
+            // Eliminar jugadores adicionales
+            for (var i = 0; i < Math.abs(diferencia); i++) {
+                document.querySelector('.left input:last-child').remove();
+            }
+        }
+
+        // Actualizar equipos
+        var equipos = document.querySelectorAll('.team');
+        equipos.forEach(equipo => {
+            // Eliminar jugadores existentes
+            equipo.innerHTML = '<h2>' + equipo.querySelector('h2').textContent + '</h2>'; // Mantener el nombre del equipo
+            // Agregar jugadores al equipo
+            for (var j = 0; j < jugadoresPorEquipo; j++) {
+                var jugador = document.createElement('a');
+                equipo.appendChild(jugador);
+            }
+        });
+    }
+});
