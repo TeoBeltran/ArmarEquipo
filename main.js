@@ -48,3 +48,4 @@ document.addEventListener("DOMContentLoaded", function() {
     const botonBorrar = document.querySelector(".btnBorrar");
     botonBorrar.addEventListener("click", borrarJugadores);
 });
+
