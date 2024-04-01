@@ -144,12 +144,17 @@ input {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Distribuye el espacio horizontalmente */
 }
 .text-container {
+    margin-right: 20px; /* Espacio entre el texto y el círculo */
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto */
 }
-.radio-container label {
-    margin-right: 100px; /* Espacio entre el texto y el círculo */
-    margin-left: 100px;
+.checkmark-container {
+    width: 25px;
+    display: flex;
+    align-items: center; /* Centra verticalmente el círculo */
 }
 .checkmark {
     height: 25px;
