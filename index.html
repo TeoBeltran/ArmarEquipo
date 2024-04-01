@@ -2,29 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armar Equipo</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Armar equipo</h1>
-        <a class="boton" href="index.html">Inicio</a></button>
-        <a class="boton" href="futbol5.html">Futbol 5</a></button>
-        <a class="boton" href="futbol8.html">Futbol 8</a></button>
     </header>
 
     <main>
-        <button class="class1">Armar equipo</button>
-
-        <div class="class2" id="class2">
+        <div class="container text-center">
+            <h3>Selección de Fútbol</h3>
+            <div id="opcionesFutbol" class="d-inline-flex align-items-center">
+                <div class="form-check radio-container mr-3">
+                    <div class="text-container">
+                        <label class="form-check-label" for="futbol5">Fútbol 5</label>
+                    </div>
+                    <input class="form-check-input" type="radio" name="tipoFutbol" id="futbol5" value="futbol5">
+                </div>
+                <div class="form-check radio-container">
+                    <div class="text-container">
+                        <label class="form-check-label" for="futbol8">Fútbol 8</label>
+                    </div>
+                    <input class="form-check-input" type="radio" name="tipoFutbol" id="futbol8" value="futbol8">
+                </div>
+            </div>
         </div>
-
-        <div class="class3">
-        </div>
-
     </main>
-
+    
     <script src="main.js" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
