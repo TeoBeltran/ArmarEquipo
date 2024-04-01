@@ -139,22 +139,22 @@ input {
 
 
 
-/* Estilos personalizados */
 .radio-container {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribuye el espacio horizontalmente */
+    justify-content: space-between;
 }
 .text-container {
-    margin-right: 20px; /* Espacio entre el texto y el círculo */
+    margin-right: -20px; /* Espacio entre el texto y el círculo */
     display: flex;
-    align-items: center; /* Centra verticalmente el texto */
+    align-items: center;
 }
 .checkmark-container {
     width: 25px;
     display: flex;
-    align-items: center; /* Centra verticalmente el círculo */
+    align-items: center;
+    margin-right: 50px;
 }
 .checkmark {
     height: 25px;
