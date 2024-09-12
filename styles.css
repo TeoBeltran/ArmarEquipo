@@ -35,32 +35,6 @@ button {
     }
 }*/
 
-.mainF {
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-.left {
-    width: 50%;
-    margin: 0;
-    padding: 20px;
-    padding-top: 0px;
-    box-sizing: border-box;
-}
-
-.right {
-    width: 50%;
-    margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-input {
-    display: block;
-    margin-bottom: 10px;
-}
-
 .team {
     margin-bottom: 20px;
     a {
@@ -174,3 +148,44 @@ input {
     background: white;
 }
 
+/*-----------------------------------------------------------------------*/
+
+.mainF {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.left, .center, .right {
+    grid-column: span 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.left input[type="text"], .center input[type="text"] {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.team {
+    margin-bottom: 20px;
+}
+
+.botones {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btnBorrar, .btnMezclar {
+    margin: 5px;
+}
+
+
+.Botones5y8{
+    margin: 0 10px;
+}
