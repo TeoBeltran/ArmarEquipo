@@ -23,17 +23,6 @@ main {
 div {
     margin-bottom: 10px;
 }
-/*
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    a {
-        text-decoration: none;
-        color: black;
-    }
-}*/
 
 .team {
     margin-bottom: 20px;
@@ -120,7 +109,7 @@ input {
     justify-content: space-between;
 }
 .text-container {
-    margin-right: -20px; /* Espacio entre el texto y el círculo */
+    margin-right: -20px;
     display: flex;
     align-items: center;
 }
@@ -152,15 +141,40 @@ input {
 
 .mainF {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    height: 100vh;/
 }
 
-.left, .center, .right {
-    grid-column: span 1;
+.left0 {
+    grid-column: 1 / span 3; /* A partir de la columna 1, usa 3 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Define 2 columnas internas */
+    gap: 10px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.left, .center {
+    background-color: #e0e0e0;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.right {
+    grid-column: 4 / span 2; /* A partir de la columna 4, usa 2 */
+    background-color: #e0e0e0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+
+    background-image: url('img/pitchGreen.jpg'); /* Ruta a la imagen de fondo */
+    background-size: 100% auto; /* La imagen ocupa el 100% del ancho del div */
+    background-repeat: no-repeat; /* La imagen no se repite */
+    background-position: left top;
 }
 
 .left input[type="text"], .center input[type="text"] {
@@ -189,3 +203,5 @@ input {
 .Botones5y8{
     margin: 0 10px;
 }
+
+
