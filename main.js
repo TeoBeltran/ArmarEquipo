@@ -1,207 +1,117 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-main {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 0 20px;
-    background-color: #ccc;
-    border-radius: 10px;
-}
-
-div {
-    margin-bottom: 10px;
-}
-
-.team {
-    margin-bottom: 20px;
-    a {
-        display: block;
-        width: 100px;
-        height: 20px;
-        background-color: gray;
-        margin-bottom: 5px;
+document.addEventListener("DOMContentLoaded", function() {
+    // Función para obtener una lista aleatoria de nombres de jugadores
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
-}
-.team h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
 
-.boton {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-right: 10px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+    // Función para asignar a los jugadores
+    function asignarJugadores() {
+        const nombresJugadores = Array.from(document.querySelectorAll(".left input, .center input"))
+                                    .map(input => input.value.trim())
+                                    .filter(nombre => nombre !== "");
 
-.boton:hover {
-    background-color: #0056b3;
-}
+        const totalJugadores = nombresJugadores.length;
+        const jugadoresPorEquipo = totalJugadores / 2; // Dividimos los jugadores entre dos equipos
 
-input {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
+        if (totalJugadores < 10) {
+            alert("Debe ingresar al menos 10 nombres de jugadores.");
+            return;
+        }
 
-.botones {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
+        const nombresAleatorios = shuffle(nombresJugadores);
 
-.btnMezclar {
-    margin-left: 10px;
-    text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+        const jugadoresEquipo = document.querySelectorAll(".right .team a");
+        jugadoresEquipo.forEach((jugador, index) => {
+            jugador.textContent = nombresAleatorios[index];
+        });
+    }
 
-.btnMezclar:hover {
-    background-color: #0056b3;
-}
+    // Función para borrar los jugadores
+    function borrarJugadores() {
+        const inputsJugadores = document.querySelectorAll(".left input, .center input");
+        inputsJugadores.forEach(input => {
+            input.value = ""; // Borrar el valor del input
+        });
 
-.btnBorrar {
-    margin-right: 10px;
-    text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #007bff;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+        const jugadoresEquipo = document.querySelectorAll(".right .team a");
+        jugadoresEquipo.forEach(jugador => {
+            jugador.textContent = ""; // Borrar el contenido del elemento a
+        });
+    }
 
-.btnBorrar:hover {
-    background-color: #a7a8aa;
-    color: #007bff;
-}
+    // Agregar un listener al botón "Generar"
+    const botonGenerar = document.querySelector(".btnMezclar");
+    botonGenerar.addEventListener("click", asignarJugadores);
 
+    // Agregar un listener al botón "Borrar"
+    const botonBorrar = document.querySelector(".btnBorrar");
+    botonBorrar.addEventListener("click", borrarJugadores);
 
+    // Agregar eventos de click a los botones de selección
+    const futbol5Btn = document.getElementById('futbol5Btn');
+    const futbol8Btn = document.getElementById('futbol8Btn');
 
-.radio-container {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.text-container {
-    margin-right: -20px;
-    display: flex;
-    align-items: center;
-}
-.checkmark-container {
-    width: 25px;
-    display: flex;
-    align-items: center;
-    margin-right: 50px;
-}
-.checkmark {
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-}
-.radio-container input:checked ~ .checkmark {
-    background-color: #007bff;
-}
-.checkmark:after {
-    content: "";
-    display: block;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: white;
-}
+    futbol5Btn.addEventListener('click', function() {
+        actualizarJugadores(5, 5);
+    });
 
-/*-----------------------------------------------------------------------*/
+    futbol8Btn.addEventListener('click', function() {
+        actualizarJugadores(8, 8);
+    });
 
-.mainF {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    height: 100vh;/
-}
+    function actualizarJugadores(jugadoresPorSeccion, jugadoresPorEquipo) {
+        // Actualizar la sección de la izquierda
+        var inputsLeft = document.querySelectorAll('.left input');
+        var diferenciaLeft = jugadoresPorSeccion - inputsLeft.length;
 
-.left0 {
-    grid-column: 1 / span 3; /* A partir de la columna 1, usa 3 */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Define 2 columnas internas */
-    gap: 10px;
-    background-color: #f8f8f8;
-    padding: 20px;
-    border: 1px solid #ccc;
-}
+        if (diferenciaLeft > 0) {
+            // Agregar jugadores adicionales en la sección de izquierda
+            for (var i = 0; i < diferenciaLeft; i++) {
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Jugador ' + (inputsLeft.length + i + 6);
+                document.querySelector('.left').appendChild(input);
+            }
+        } else if (diferenciaLeft < 0) {
+            // Eliminar jugadores adicionales en la sección de izquierda
+            for (var i = 0; i < Math.abs(diferenciaLeft); i++) {
+                document.querySelector('.left input:last-child').remove();
+            }
+        }
 
-.left, .center {
-    background-color: #e0e0e0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        // Actualizar la sección del centro
+        var inputsCenter = document.querySelectorAll('.center input');
+        var diferenciaCenter = jugadoresPorSeccion - inputsCenter.length;
 
-.right {
-    grid-column: 4 / span 2; /* A partir de la columna 4, usa 2 */
-    background-color: #e0e0e0;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+        if (diferenciaCenter > 0) {
+            // Agregar jugadores adicionales en la sección del centro
+            for (var i = 0; i < diferenciaCenter; i++) {
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Jugador ' + (inputsCenter.length + i + 9);
+                document.querySelector('.center').appendChild(input);
+            }
+        } else if (diferenciaCenter < 0) {
+            // Eliminar jugadores adicionales en la sección del centro
+            for (var i = 0; i < Math.abs(diferenciaCenter); i++) {
+                document.querySelector('.center input:last-child').remove();
+            }
+        }
 
-
-    background-image: url('img/pitchGreen.jpg'); /* Ruta a la imagen de fondo */
-    background-size: 100% auto; /* La imagen ocupa el 100% del ancho del div */
-    background-repeat: no-repeat; /* La imagen no se repite */
-    background-position: left top;
-}
-
-.left input[type="text"], .center input[type="text"] {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 10px 0;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.team {
-    margin-bottom: 20px;
-}
-
-.botones {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.btnBorrar, .btnMezclar {
-    margin: 5px;
-}
-
-
-.Botones5y8{
-    margin: 0 10px;
-}
-
-
+        // Actualizar equipos
+        var equipos = document.querySelectorAll('.team');
+        equipos.forEach(equipo => {
+            // Eliminar jugadores existentes
+            equipo.innerHTML = '<h2>' + equipo.querySelector('h2').textContent + '</h2>'; // Mantener el nombre del equipo
+            // Agregar jugadores al equipo
+            for (var j = 0; j < jugadoresPorEquipo; j++) {
+                var jugador = document.createElement('a');
+                equipo.appendChild(jugador);
+            }
+        });
+    }
+});
