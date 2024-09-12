@@ -10,11 +10,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Función para asignar a los jugadores
     function asignarJugadores() {
-        const nombresJugadores = Array.from(document.querySelectorAll(".left input"))
+        const nombresJugadores = Array.from(document.querySelectorAll(".left input, .center input"))
                                     .map(input => input.value.trim())
                                     .filter(nombre => nombre !== "");
 
-        if (nombresJugadores.length < 10) {
+        const totalJugadores = nombresJugadores.length;
+        const jugadoresPorEquipo = totalJugadores / 2; // Dividimos los jugadores entre dos equipos
+
+        if (totalJugadores < 10) {
             alert("Debe ingresar al menos 10 nombres de jugadores.");
             return;
         }
@@ -29,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Función para borrar los jugadores
     function borrarJugadores() {
-        const inputsJugadores = document.querySelectorAll(".left input");
+        const inputsJugadores = document.querySelectorAll(".left input, .center input");
         inputsJugadores.forEach(input => {
             input.value = ""; // Borrar el valor del input
         });
@@ -40,42 +43,62 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Agregar un listener al botón "Confirmar"
-    const botonConfirmar = document.querySelector(".btnMezclar");
-    botonConfirmar.addEventListener("click", asignarJugadores);
+    // Agregar un listener al botón "Generar"
+    const botonGenerar = document.querySelector(".btnMezclar");
+    botonGenerar.addEventListener("click", asignarJugadores);
 
     // Agregar un listener al botón "Borrar"
     const botonBorrar = document.querySelector(".btnBorrar");
     botonBorrar.addEventListener("click", borrarJugadores);
 
-    // Agregar eventos de cambio a los botones de radio
-    const futbol5Radio = document.getElementById('futbol5');
-    const futbol8Radio = document.getElementById('futbol8');
+    // Agregar eventos de click a los botones de selección
+    const futbol5Btn = document.getElementById('futbol5Btn');
+    const futbol8Btn = document.getElementById('futbol8Btn');
 
-    futbol5Radio.addEventListener('change', function() {
-        actualizarJugadores(10, 5);
+    futbol5Btn.addEventListener('click', function() {
+        actualizarJugadores(5, 5);
     });
 
-    futbol8Radio.addEventListener('change', function() {
-        actualizarJugadores(16, 8);
+    futbol8Btn.addEventListener('click', function() {
+        actualizarJugadores(8, 8);
     });
 
-    function actualizarJugadores(totalJugadores, jugadoresPorEquipo) {
-        var inputs = document.querySelectorAll('.left input');
-        var diferencia = totalJugadores - inputs.length;
+    function actualizarJugadores(jugadoresPorSeccion, jugadoresPorEquipo) {
+        // Actualizar la sección de la izquierda
+        var inputsLeft = document.querySelectorAll('.left input');
+        var diferenciaLeft = jugadoresPorSeccion - inputsLeft.length;
 
-        if (diferencia > 0) {
-            // Agregar jugadores adicionales
-            for (var i = 0; i < diferencia; i++) {
+        if (diferenciaLeft > 0) {
+            // Agregar jugadores adicionales en la sección de izquierda
+            for (var i = 0; i < diferenciaLeft; i++) {
                 var input = document.createElement('input');
                 input.type = 'text';
-                input.placeholder = 'Jugador ' + (inputs.length + i + 1);
+                input.placeholder = 'Jugador ' + (inputsLeft.length + i + 6);
                 document.querySelector('.left').appendChild(input);
             }
-        } else if (diferencia < 0) {
-            // Eliminar jugadores adicionales
-            for (var i = 0; i < Math.abs(diferencia); i++) {
+        } else if (diferenciaLeft < 0) {
+            // Eliminar jugadores adicionales en la sección de izquierda
+            for (var i = 0; i < Math.abs(diferenciaLeft); i++) {
                 document.querySelector('.left input:last-child').remove();
+            }
+        }
+
+        // Actualizar la sección del centro
+        var inputsCenter = document.querySelectorAll('.center input');
+        var diferenciaCenter = jugadoresPorSeccion - inputsCenter.length;
+
+        if (diferenciaCenter > 0) {
+            // Agregar jugadores adicionales en la sección del centro
+            for (var i = 0; i < diferenciaCenter; i++) {
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Jugador ' + (inputsCenter.length + i + 9);
+                document.querySelector('.center').appendChild(input);
+            }
+        } else if (diferenciaCenter < 0) {
+            // Eliminar jugadores adicionales en la sección del centro
+            for (var i = 0; i < Math.abs(diferenciaCenter); i++) {
+                document.querySelector('.center input:last-child').remove();
             }
         }
 
