@@ -1,74 +1,84 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armar Equipo</title>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>Armar equipo</h1>
-    </header>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!--h1 class="text-4xl font-bold text-center mb-8">Armar Equipo</h1>
+        
+        <div class="flex justify-center gap-4 mb-8">
+            <button id="futbol5Btn" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Futbol 5</button>
+            <button id="futbol8Btn" class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Futbol 8</button>
+            <button class="btnBorrar px-8 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Borrar</button>
+            <button class="btnMezclar px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-yellow-600 transition">Mezclar</button>
+        </div-->
+        
+        <div class="mainF grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="left">
+                <h1 class="text-4xl font-bold text-center mb-8">Armar Equipo</h1>
+        
+                <div class="flex justify-center gap-4 mb-8">
+                    <!--button class="px-6 py-2 bg-yellow-500 text-white rounded-lg hover:bg-blue-600 transition">Rápido</button-->
+                    <button id="futbol5Btn" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Futbol 5</button>
+                    <button id="futbol8Btn" class="px-6 py-2 bg-green-800 text-white rounded-lg hover:bg-purple-600 transition">Futbol 8</button>
+                    <button class="btnBorrar px-8 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Borrar</button>
+                    <button class="btnMezclar px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-yellow-600 transition">Mezclar</button>
+                </div>
 
-    <main>
-        <div class="container text-center">
-            <br><h3>Selección de Futbol</h3>
-            <div class="Botones5y8" id="opcionesFutbol" class="d-inline-flex align-items-center">
-                <button id="futbol5Btn" class="btn btn-primary btn-selection">Futbol 5</button>
-                <button id="futbol8Btn" class="btn btn-primary btn-selection">Futbol 8</button>
+                <textarea class="w-full h-[400px] p-4 border rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ingrese nombres de jugadores..."></textarea>
+            </div>
+            
+            <div class="right bg-cover bg-center bg-no-repeat rounded-lg p-6" style="background-image: url('img/pitchGreen.jpg'); height: 800px; background-size: cover; background-position: center;"><br>
+                <div class="team mb-8 p-4 rounded-lg">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex justify-center" id="team1div1">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 1</a>
+                        </div>
+                        <div class="flex justify-center" id="team1div2">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 2</a>
+                        </div>
+                        <div class="flex justify-center" id="team1div3">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 3</a>
+                        </div>
+                        <div class="flex justify-center" id="team1div4">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 4</a>
+                        </div>
+                        <div class="flex justify-center" id="team1div5">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 5</a>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br><br><br><br><br>
+                
+                <div class="team p-4 rounded-lg">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex justify-center" id="team2div1">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 1</a>
+                        </div>
+                        <div class="flex justify-center" id="team2div2">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 2</a>
+                        </div>
+                        <div class="flex justify-center" id="team2div3">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 3</a>
+                        </div>
+                        <div class="flex justify-center" id="team2div4">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 4</a>
+                        </div>
+                        <div class="flex justify-center" id="team2div5">
+                            <a class="block p-2 bg-blue-100 rounded hover:bg-blue-200 transition">Jugador 5</a>
+                        </div>
+                    </div>
+                </div>                
             </div>
         </div>
+        
+    </div>
 
-
-        <div class="mainF">
-            <div class="left0">
-                <div class="left">
-                    <h2>Jugadores:</h2>
-                    <input type="text" placeholder="Jugador 1">
-                    <input type="text" placeholder="Jugador 2">
-                    <input type="text" placeholder="Jugador 3">
-                    <input type="text" placeholder="Jugador 4">
-                    <input type="text" placeholder="Jugador 5">
-                </div>
-                <div class="center">
-                    <h2>Jugadores:</h2>
-                    <input type="text" placeholder="Jugador 6">
-                    <input type="text" placeholder="Jugador 7">
-                    <input type="text" placeholder="Jugador 8">
-                    <input type="text" placeholder="Jugador 9">
-                    <input type="text" placeholder="Jugador 10"> 
-                </div>
-            </div>
-            <div class="right">
-                <div class="team">
-                    <h2>Equipo 1</h2>
-                    <a></a>
-                    <a></a>
-                    <a></a>
-                    <a></a>
-                    <a></a>
-                </div>
-                <div class="team">
-                    <h2>Equipo 2</h2>
-                    <a></a>
-                    <a></a>
-                    <a></a>
-                    <a></a>
-                    <a></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="botones">
-            <button class="btnBorrar">Borrar</button>
-            <button class="btnMezclar">Generar</button>
-        </div>
-    </main>
-    
-    <script src="main.js" defer></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

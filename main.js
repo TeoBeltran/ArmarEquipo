@@ -1,117 +1,80 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Función para obtener una lista aleatoria de nombres de jugadores
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
+// Selección de elementos del DOM
+const textarea = document.querySelector("textarea");
+const btnBorrar = document.querySelector(".btnBorrar");
+const btnMezclar = document.querySelector(".btnMezclar");
+const futbol5Btn = document.getElementById("futbol5Btn");
+const futbol8Btn = document.getElementById("futbol8Btn");
+const teamDivs = document.querySelectorAll(".team");
 
-    // Función para asignar a los jugadores
-    function asignarJugadores() {
-        const nombresJugadores = Array.from(document.querySelectorAll(".left input, .center input"))
-                                    .map(input => input.value.trim())
-                                    .filter(nombre => nombre !== "");
+// Función para actualizar el número de jugadores por equipo
+function actualizarJugadoresPorEquipo(cantidad) {
+    teamDivs.forEach((teamDiv, teamIndex) => {
+        const teamLinks = teamDiv.querySelectorAll("a");
+        const currentPlayerCount = teamLinks.length;
 
-        const totalJugadores = nombresJugadores.length;
-        const jugadoresPorEquipo = totalJugadores / 2; // Dividimos los jugadores entre dos equipos
-
-        if (totalJugadores < 10) {
-            alert("Debe ingresar al menos 10 nombres de jugadores.");
-            return;
+        // Si hay más jugadores de los necesarios, eliminamos los extras
+        if (currentPlayerCount > cantidad) {
+            for (let i = currentPlayerCount; i > cantidad; i--) {
+                teamLinks[i - 1].parentElement.remove(); // Eliminamos el div entero con el jugador
+            }
         }
 
-        const nombresAleatorios = shuffle(nombresJugadores);
+        // Si hay menos jugadores de los necesarios, agregamos los faltantes
+        for (let i = currentPlayerCount; i < cantidad; i++) {
+            // Crear el div contenedor para el jugador
+            const newPlayerDiv = document.createElement("div");
+            newPlayerDiv.classList.add("flex", "justify-center");
+            newPlayerDiv.id = `team${teamIndex + 1}div${i + 1}`; // Asignar id único
 
-        const jugadoresEquipo = document.querySelectorAll(".right .team a");
-        jugadoresEquipo.forEach((jugador, index) => {
-            jugador.textContent = nombresAleatorios[index];
-        });
-    }
+            // Crear el enlace para el jugador
+            const newPlayerLink = document.createElement("a");
+            newPlayerLink.classList.add("block", "p-2", "bg-blue-100", "rounded", "hover:bg-blue-200", "transition");
+            newPlayerLink.textContent = `Jugador ${i + 1}`;
 
-    // Función para borrar los jugadores
-    function borrarJugadores() {
-        const inputsJugadores = document.querySelectorAll(".left input, .center input");
-        inputsJugadores.forEach(input => {
-            input.value = ""; // Borrar el valor del input
-        });
-
-        const jugadoresEquipo = document.querySelectorAll(".right .team a");
-        jugadoresEquipo.forEach(jugador => {
-            jugador.textContent = ""; // Borrar el contenido del elemento a
-        });
-    }
-
-    // Agregar un listener al botón "Generar"
-    const botonGenerar = document.querySelector(".btnMezclar");
-    botonGenerar.addEventListener("click", asignarJugadores);
-
-    // Agregar un listener al botón "Borrar"
-    const botonBorrar = document.querySelector(".btnBorrar");
-    botonBorrar.addEventListener("click", borrarJugadores);
-
-    // Agregar eventos de click a los botones de selección
-    const futbol5Btn = document.getElementById('futbol5Btn');
-    const futbol8Btn = document.getElementById('futbol8Btn');
-
-    futbol5Btn.addEventListener('click', function() {
-        actualizarJugadores(5, 5);
+            // Encontrar el contenedor de grid (dentro de teamDiv) y agregar el nuevo div
+            const gridContainer = teamDiv.querySelector(".grid.grid-cols-2.gap-4");
+            gridContainer.appendChild(newPlayerDiv);
+            newPlayerDiv.appendChild(newPlayerLink); // Agregar el enlace dentro del div
+        }
     });
+}
 
-    futbol8Btn.addEventListener('click', function() {
-        actualizarJugadores(8, 8);
-    });
+// Evento para borrar el contenido del textarea
+btnBorrar.addEventListener("click", () => {
+    textarea.value = ""; // Vacía el contenido del textarea
+});
 
-    function actualizarJugadores(jugadoresPorSeccion, jugadoresPorEquipo) {
-        // Actualizar la sección de la izquierda
-        var inputsLeft = document.querySelectorAll('.left input');
-        var diferenciaLeft = jugadoresPorSeccion - inputsLeft.length;
+// Evento para mezclar jugadores
+btnMezclar.addEventListener("click", () => {
+    const jugadores = textarea.value.trim().split("\n").filter(linea => linea.trim() !== ""); // Divide en líneas no vacías
 
-        if (diferenciaLeft > 0) {
-            // Agregar jugadores adicionales en la sección de izquierda
-            for (var i = 0; i < diferenciaLeft; i++) {
-                var input = document.createElement('input');
-                input.type = 'text';
-                input.placeholder = 'Jugador ' + (inputsLeft.length + i + 6);
-                document.querySelector('.left').appendChild(input);
-            }
-        } else if (diferenciaLeft < 0) {
-            // Eliminar jugadores adicionales en la sección de izquierda
-            for (var i = 0; i < Math.abs(diferenciaLeft); i++) {
-                document.querySelector('.left input:last-child').remove();
-            }
-        }
-
-        // Actualizar la sección del centro
-        var inputsCenter = document.querySelectorAll('.center input');
-        var diferenciaCenter = jugadoresPorSeccion - inputsCenter.length;
-
-        if (diferenciaCenter > 0) {
-            // Agregar jugadores adicionales en la sección del centro
-            for (var i = 0; i < diferenciaCenter; i++) {
-                var input = document.createElement('input');
-                input.type = 'text';
-                input.placeholder = 'Jugador ' + (inputsCenter.length + i + 9);
-                document.querySelector('.center').appendChild(input);
-            }
-        } else if (diferenciaCenter < 0) {
-            // Eliminar jugadores adicionales en la sección del centro
-            for (var i = 0; i < Math.abs(diferenciaCenter); i++) {
-                document.querySelector('.center input:last-child').remove();
-            }
-        }
-
-        // Actualizar equipos
-        var equipos = document.querySelectorAll('.team');
-        equipos.forEach(equipo => {
-            // Eliminar jugadores existentes
-            equipo.innerHTML = '<h2>' + equipo.querySelector('h2').textContent + '</h2>'; // Mantener el nombre del equipo
-            // Agregar jugadores al equipo
-            for (var j = 0; j < jugadoresPorEquipo; j++) {
-                var jugador = document.createElement('a');
-                equipo.appendChild(jugador);
-            }
-        });
+    if (jugadores.length === 0) {
+        alert("No hay jugadores para mezclar.");
+        return;
     }
+
+    // Mezclar jugadores aleatoriamente
+    const jugadoresMezclados = [...jugadores].sort(() => Math.random() - 0.5);
+
+    // Repartir jugadores entre los equipos sin repetir
+    let jugadorIndex = 0;
+    teamDivs.forEach((teamDiv, teamIndex) => {
+        const teamLinks = teamDiv.querySelectorAll("a");
+        teamLinks.forEach((link, playerIndex) => {
+            link.textContent = jugadoresMezclados[jugadorIndex] || "Jugador vacío"; // Asignar jugador o texto vacío
+            // Asignar un id único para cada jugador (teamXdivX) según el índice de equipo y jugador
+            link.parentElement.id = `team${teamIndex + 1}div${playerIndex + 1}`;
+            jugadorIndex++;
+        });
+    });
+});
+
+// Evento para configurar el modo Futbol 5
+futbol5Btn.addEventListener("click", () => {
+    actualizarJugadoresPorEquipo(5); // Establecer 5 jugadores por equipo
+});
+
+// Evento para configurar el modo Futbol 8
+futbol8Btn.addEventListener("click", () => {
+    actualizarJugadoresPorEquipo(8); // Establecer 8 jugadores por equipo
 });
